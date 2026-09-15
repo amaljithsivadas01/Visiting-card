@@ -2,26 +2,91 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Staff Directory & Cards</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #c5d4fc; /* Soft periwinkle background from reference */
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #c5d4fc; /* Soft periwinkle background */
       min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* --- Dark Navigation Bar --- */
+    .navbar {
+      background-color: #121316;
+      /* iPhone notch safe-area handling */
+      padding-top: max(12px, env(safe-area-inset-top));
+      padding-bottom: 12px;
+      padding-left: max(20px, env(safe-area-inset-left));
+      padding-right: max(20px, env(safe-area-inset-right));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .nav-brand img {
+      height: 40px;
+      width: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    /* WhatsApp Button */
+    .whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: #25d366;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 50px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+    }
+
+    .whatsapp-btn:hover {
+      background-color: #20bd5a;
+      transform: translateY(-1px);
+    }
+
+    .whatsapp-btn:active {
+      transform: scale(0.96);
+    }
+
+    .whatsapp-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    /* --- Content Layout --- */
+    .main-wrapper {
+      flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 40px 20px;
+      padding-bottom: max(40px, env(safe-area-inset-bottom));
     }
 
     .table-container {
@@ -30,7 +95,7 @@
       background: #ffffff;
       border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 10px 30px rgba(76, 91, 166, 0.08);
+      box-shadow: 0 12px 36px rgba(76, 91, 166, 0.12);
     }
 
     table {
@@ -40,14 +105,14 @@
     }
 
     thead {
-      background-color: #6c78e8; /* Signature header purple from UI reference */
+      background-color: #6c78e8;
     }
 
     thead th {
       color: #ffffff;
       font-weight: 500;
-      font-size: 14px;
-      padding: 18px 24px;
+      font-size: 13.5px;
+      padding: 18px 20px;
       letter-spacing: 0.2px;
     }
 
@@ -60,32 +125,34 @@
       border-bottom: none;
     }
 
-    /* Hover effect matching the cursor selection in the reference UI */
     tbody tr:hover {
       background-color: #f1f3fd;
-      cursor: pointer;
     }
 
     tbody td {
-      padding: 16px 24px;
-      font-size: 13.5px;
-      color: #686d82; /* Muted text color for body rows */
+      padding: 16px 20px;
+      font-size: 13px;
+      color: #686d82;
       vertical-align: middle;
     }
 
     .name-col {
-      font-weight: 500;
-      color: #4b4f63;
+      font-weight: 600;
+      color: #383b4c;
     }
 
     .card-badge {
       display: inline-block;
-      font-weight: 500;
+      font-weight: 600;
       color: #6c78e8;
+      background: #eef1fd;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 12px;
     }
 
     .empty-cell {
-      color: #c2c6d4;
+      color: #b2b6c7;
     }
 
     a.table-link {
@@ -94,93 +161,198 @@
       transition: color 0.15s ease;
     }
 
-    tbody tr:hover a.table-link {
+    a.table-link:hover {
       color: #5562df;
+      text-decoration: underline;
+    }
+
+    /* --- Responsive Styling (Specialized for iPhone Screens) --- */
+    @media (max-width: 768px) {
+      .main-wrapper {
+        padding: 16px;
+      }
+
+      .nav-brand img {
+        height: 32px;
+      }
+
+      .whatsapp-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+      }
+
+      .whatsapp-btn span {
+        display: none; /* Shows icon only on small screens to save space */
+      }
+
+      /* Transform table to clean touch-friendly mobile cards */
+      .table-container {
+        background: transparent;
+        box-shadow: none;
+        border-radius: 0;
+      }
+
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+
+      thead {
+        display: none; /* Hide traditional headers */
+      }
+
+      tbody tr {
+        background: #ffffff;
+        border-radius: 16px;
+        margin-bottom: 16px;
+        padding: 16px;
+        border: 1px solid rgba(108, 120, 232, 0.12);
+        box-shadow: 0 6px 18px rgba(76, 91, 166, 0.07);
+      }
+
+      tbody tr:last-child {
+        margin-bottom: 0;
+      }
+
+      tbody td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 9px 0;
+        border-bottom: 1px dashed #f0f2f8;
+        font-size: 13px;
+      }
+
+      tbody td:last-child {
+        border-bottom: none;
+      }
+
+      /* Dynamically supply row label via data-label */
+      tbody td::before {
+        content: attr(data-label);
+        font-weight: 500;
+        color: #9297ab;
+        font-size: 12px;
+        text-transform: capitalize;
+        padding-right: 12px;
+        flex-shrink: 0;
+      }
+
+      td.name-col {
+        font-size: 16px;
+        padding-top: 0;
+        color: #1e2029;
+      }
+
+      td.name-col::before {
+        display: none;
+      }
     }
   </style>
 </head>
 <body>
 
-  <div class="table-container">
-    <table>
-      <thead>
-        <tr>
-          <th>Name on Card</th>
-          <th>Designation</th>
-          <th>Designation as per Offer Letter</th>
-          <th>Card Nos</th>
-          <th>Phone</th>
-          <th>Email</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="name-col">Jayadev</td>
-          <td>Founder & CEO</td>
-          <td class="empty-cell">—</td>
-          <td><span class="card-badge">200</span></td>
-          <td><a class="table-link" href="tel:9686764111">9686764111</a></td>
-          <td><a class="table-link" href="mailto:jayadev@jdcorp.in">jayadev@jdcorp.in</a></td>
-        </tr>
-        <tr>
-          <td class="name-col">Satheesh Kumar</td>
-          <td>Procurement coordinator</td>
-          <td class="empty-cell">—</td>
-          <td><span class="card-badge">200</span></td>
-          <td><a class="table-link" href="tel:9447188688">9447188688</a></td>
-          <td class="empty-cell">—</td>
-        </tr>
-        <tr>
-          <td class="name-col">Prakash</td>
-          <td>Manager-Operations</td>
-          <td class="empty-cell">—</td>
-          <td><span class="card-badge">100</span></td>
-          <td><a class="table-link" href="tel:8281942995">8281942995</a></td>
-          <td><a class="table-link" href="mailto:prakash@jdcorp.in">prakash@jdcorp.in</a></td>
-        </tr>
-        <tr>
-          <td class="name-col">Sibin</td>
-          <td>Project Coordinator</td>
-          <td class="empty-cell">—</td>
-          <td><span class="card-badge">100</span></td>
-          <td><a class="table-link" href="tel:7025501073">7025501073</a></td>
-          <td><a class="table-link" href="mailto:project@jdcorp.in">project@jdcorp.in</a></td>
-        </tr>
-        <tr>
-          <td class="name-col">Sumesh S K</td>
-          <td>Project Manager</td>
-          <td>Senior procurement & Project Manager</td>
-          <td><span class="card-badge">100</span></td>
-          <td><a class="table-link" href="tel:9886865409">9886865409</a></td>
-          <td><a class="table-link" href="mailto:sumeshsk@jdcorp.in">sumeshsk@jdcorp.in</a></td>
-        </tr>
-        <tr>
-          <td class="name-col">Jinoj M Janardhanan</td>
-          <td>Manager-Procurement</td>
-          <td>Senior contract Manager</td>
-          <td><span class="card-badge">100</span></td>
-          <td><a class="table-link" href="tel:9880957539">9880957539</a></td>
-          <td><a class="table-link" href="mailto:Info@jdcorp.in">Info@jdcorp.in</a></td>
-        </tr>
-        <tr>
-          <td class="name-col">Kiran kumar</td>
-          <td>Site engineer</td>
-          <td>Project Engineer</td>
-          <td><span class="card-badge">100</span></td>
-          <td><a class="table-link" href="tel:9353545781">9353545781</a></td>
-          <td><a class="table-link" href="mailto:Jdcengineer@jdcorp.in">Jdcengineer@jdcorp.in</a></td>
-        </tr>
-        <tr>
-          <td class="name-col">Pawan kumar</td>
-          <td>Accounts Manager</td>
-          <td>Senior Accountant</td>
-          <td><span class="card-badge">100</span></td>
-          <td><a class="table-link" href="tel:9886280185">9886280185</a></td>
-          <td><a class="table-link" href="mailto:admin@jdcorp.in">admin@jdcorp.in</a></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <!-- Sticky Dark Header Navigation -->
+  <header class="navbar">
+    <a href="#" class="nav-brand">
+      <!-- Replace with your local logo path: e.g. src="1000381066.png" -->
+      <img src="./Logo_white" alt="Iamlo Logo">
+    </a>
+
+    <!-- WhatsApp Chat Direct Link -->
+    <a href="https://wa.me/917907326523?text=Hi,%20reaching%20out%20from%20the%20directory" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="whatsapp-btn">
+      <svg viewBox="0 0 24 24">
+        <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.03-1.25-.75-.67-1.26-1.5-1.41-1.75-.14-.25-.02-.39.11-.51.11-.11.25-.29.38-.44.12-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.3z"/>
+      </svg>
+      <span>Chat on WhatsApp</span>
+    </a>
+  </header>
+
+  <!-- Table Content -->
+  <main class="main-wrapper">
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Name on the card</th>
+            <th>Designation</th>
+            <th>Designation as per offer letter/Varsha</th>
+            <th>Card nos</th>
+            <th>Phone</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name-col" data-label="Name">Jayadev</td>
+            <td data-label="Designation">Founder & CEO</td>
+            <td data-label="Offer Designation" class="empty-cell">—</td>
+            <td data-label="Card Nos"><span class="card-badge">200</span></td>
+            <td data-label="Phone"><a class="table-link" href="tel:9686764111">9686764111</a></td>
+            <td data-label="Email"><a class="table-link" href="mailto:jayadev@jdcorp.in">jayadev@jdcorp.in</a></td>
+          </tr>
+          <tr>
+            <td class="name-col" data-label="Name">Satheesh Kumar</td>
+            <td data-label="Designation">Procurement coordinator</td>
+            <td data-label="Offer Designation" class="empty-cell">—</td>
+            <td data-label="Card Nos"><span class="card-badge">200</span></td>
+            <td data-label="Phone"><a class="table-link" href="tel:9447188688">9447188688</a></td>
+            <td data-label="Email" class="empty-cell">—</td>
+          </tr>
+          <tr>
+            <td class="name-col" data-label="Name">Prakash</td>
+            <td data-label="Designation">Manager-Operations</td>
+            <td data-label="Offer Designation" class="empty-cell">—</td>
+            <td data-label="Card Nos"><span class="card-badge">100</span></td>
+            <td data-label="Phone"><a class="table-link" href="tel:8281942995">8281942995</a></td>
+            <td data-label="Email"><a class="table-link" href="mailto:prakash@jdcorp.in">prakash@jdcorp.in</a></td>
+          </tr>
+          <tr>
+            <td class="name-col" data-label="Name">Sibin</td>
+            <td data-label="Designation">Project Coordinator</td>
+            <td data-label="Offer Designation" class="empty-cell">—</td>
+            <td data-label="Card Nos"><span class="card-badge">100</span></td>
+            <td data-label="Phone"><a class="table-link" href="tel:7025501073">7025501073</a></td>
+            <td data-label="Email"><a class="table-link" href="mailto:project@jdcorp.in">project@jdcorp.in</a></td>
+          </tr>
+          <tr>
+            <td class="name-col" data-label="Name">Sumesh S K</td>
+            <td data-label="Designation">Project Manager</td>
+            <td data-label="Offer Designation">Senior procurement & Project Manager</td>
+            <td data-label="Card Nos"><span class="card-badge">100</span></td>
+            <td data-label="Phone"><a class="table-link" href="tel:9886865409">9886865409</a></td>
+            <td data-label="Email"><a class="table-link" href="mailto:sumeshsk@jdcorp.in">sumeshsk@jdcorp.in</a></td>
+          </tr>
+          <tr>
+            <td class="name-col" data-label="Name">Jinoj M Janardhanan</td>
+            <td data-label="Designation">Manager-Procurement</td>
+            <td data-label="Offer Designation">Senior contract Manager</td>
+            <td data-label="Card Nos"><span class="card-badge">100</span></td>
+            <td data-label="Phone"><a class="table-link" href="tel:9880957539">9880957539</a></td>
+            <td data-label="Email"><a class="table-link" href="mailto:Info@jdcorp.in">Info@jdcorp.in</a></td>
+          </tr>
+          <tr>
+            <td class="name-col" data-label="Name">Kiran kumar</td>
+            <td data-label="Designation">Site engineer</td>
+            <td data-label="Offer Designation">Project Engineer</td>
+            <td data-label="Card Nos"><span class="card-badge">100</span></td>
+            <td data-label="Phone"><a class="table-link" href="tel:9353545781">9353545781</a></td>
+            <td data-label="Email"><a class="table-link" href="mailto:Jdcengineer@jdcorp.in">Jdcengineer@jdcorp.in</a></td>
+          </tr>
+          <tr>
+            <td class="name-col" data-label="Name">Pawan kumar</td>
+            <td data-label="Designation">Accounts Manager</td>
+            <td data-label="Offer Designation">Senior Accountant</td>
+            <td data-label="Card Nos"><span class="card-badge">100</span></td>
+            <td data-label="Phone"><a class="table-link" href="tel:9886280185">9886280185</a></td>
+            <td data-label="Email"><a class="table-link" href="mailto:admin@jdcorp.in">admin@jdcorp.in</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
 
 </body>
 </html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Staff Directory & Cards</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #c5d4fc; /* Soft periwinkle background from reference */
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .table-container {
+      width: 100%;
+      max-width: 1200px;
+      background: #ffffff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(76, 91, 166, 0.08);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    thead {
+      background-color: #6c78e8; /* Signature header purple from UI reference */
+    }
+
+    thead th {
+      color: #ffffff;
+      font-weight: 500;
+      font-size: 14px;
+      padding: 18px 24px;
+      letter-spacing: 0.2px;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid #f0f2f8;
+      transition: background-color 0.2s ease;
+    }
+
+    tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    /* Hover effect matching the cursor selection in the reference UI */
+    tbody tr:hover {
+      background-color: #f1f3fd;
+      cursor: pointer;
+    }
+
+    tbody td {
+      padding: 16px 24px;
+      font-size: 13.5px;
+      color: #686d82; /* Muted text color for body rows */
+      vertical-align: middle;
+    }
+
+    .name-col {
+      font-weight: 500;
+      color: #4b4f63;
+    }
+
+    .card-badge {
+      display: inline-block;
+      font-weight: 500;
+      color: #6c78e8;
+    }
+
+    .empty-cell {
+      color: #c2c6d4;
+    }
+
+    a.table-link {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    tbody tr:hover a.table-link {
+      color: #5562df;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Name on Card</th>
+          <th>Designation</th>
+          <th>Designation as per Offer Letter</th>
+          <th>Card Nos</th>
+          <th>Phone</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name-col">Jayadev</td>
+          <td>Founder & CEO</td>
+          <td class="empty-cell">—</td>
+          <td><span class="card-badge">200</span></td>
+          <td><a class="table-link" href="tel:9686764111">9686764111</a></td>
+          <td><a class="table-link" href="mailto:jayadev@jdcorp.in">jayadev@jdcorp.in</a></td>
+        </tr>
+        <tr>
+          <td class="name-col">Satheesh Kumar</td>
+          <td>Procurement coordinator</td>
+          <td class="empty-cell">—</td>
+          <td><span class="card-badge">200</span></td>
+          <td><a class="table-link" href="tel:9447188688">9447188688</a></td>
+          <td class="empty-cell">—</td>
+        </tr>
+        <tr>
+          <td class="name-col">Prakash</td>
+          <td>Manager-Operations</td>
+          <td class="empty-cell">—</td>
+          <td><span class="card-badge">100</span></td>
+          <td><a class="table-link" href="tel:8281942995">8281942995</a></td>
+          <td><a class="table-link" href="mailto:prakash@jdcorp.in">prakash@jdcorp.in</a></td>
+        </tr>
+        <tr>
+          <td class="name-col">Sibin</td>
+          <td>Project Coordinator</td>
+          <td class="empty-cell">—</td>
+          <td><span class="card-badge">100</span></td>
+          <td><a class="table-link" href="tel:7025501073">7025501073</a></td>
+          <td><a class="table-link" href="mailto:project@jdcorp.in">project@jdcorp.in</a></td>
+        </tr>
+        <tr>
+          <td class="name-col">Sumesh S K</td>
+          <td>Project Manager</td>
+          <td>Senior procurement & Project Manager</td>
+          <td><span class="card-badge">100</span></td>
+          <td><a class="table-link" href="tel:9886865409">9886865409</a></td>
+          <td><a class="table-link" href="mailto:sumeshsk@jdcorp.in">sumeshsk@jdcorp.in</a></td>
+        </tr>
+        <tr>
+          <td class="name-col">Jinoj M Janardhanan</td>
+          <td>Manager-Procurement</td>
+          <td>Senior contract Manager</td>
+          <td><span class="card-badge">100</span></td>
+          <td><a class="table-link" href="tel:9880957539">9880957539</a></td>
+          <td><a class="table-link" href="mailto:Info@jdcorp.in">Info@jdcorp.in</a></td>
+        </tr>
+        <tr>
+          <td class="name-col">Kiran kumar</td>
+          <td>Site engineer</td>
+          <td>Project Engineer</td>
+          <td><span class="card-badge">100</span></td>
+          <td><a class="table-link" href="tel:9353545781">9353545781</a></td>
+          <td><a class="table-link" href="mailto:Jdcengineer@jdcorp.in">Jdcengineer@jdcorp.in</a></td>
+        </tr>
+        <tr>
+          <td class="name-col">Pawan kumar</td>
+          <td>Accounts Manager</td>
+          <td>Senior Accountant</td>
+          <td><span class="card-badge">100</span></td>
+          <td><a class="table-link" href="tel:9886280185">9886280185</a></td>
+          <td><a class="table-link" href="mailto:admin@jdcorp.in">admin@jdcorp.in</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</body>
+</html>
